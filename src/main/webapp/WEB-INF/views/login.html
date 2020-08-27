@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма авторизации</title>
+    <link rel="stylesheet" th:href="@{static/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="fragments/menu::header"/>
+<h1>Войдите, пожалуйста:</h1>
+<div class="alert alert-danger" role="alert" th:if="${param.error != null}">Неправильный логин или пароль
+</div>
+<form action="/authenticate" method="post">
+    <div class="form-group">
+        <label for="username">Логин</label>
+        <input type="text" class="form-control" id="username" name="username">
+    </div>
+    <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password" class="form-control" id="password" name="password">
+    </div>
+    <button type="submit" class="btn btn-success">Войти</button>
+
+</form>
+
+<script type="text/javascript" th:src="@{static/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" th:src="@{static/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{static/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

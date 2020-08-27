@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{static/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="fragments/menu::header"/>
+<h1>Cписок преподавателей</h1>
+<table class="table">
+    <thead>
+    <tr>
+       <th>ФИО Преподавателя</th>
+       <th>Курс</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="teacher : ${teachers}">
+        <td th:text="${teacher.fio}"></td>
+        <td th:text="${teacher.about}"></td>
+    </tr>
+    </tbody>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li th:each="page, iterStat : ${pages}" class="page-item">
+                <a class="page-link" th:href="@{/teachers(pageNo=${iterStat.index})}" th:text="${iterStat.index + 1}"></a>
+            </li>
+        </ul>
+    </nav>
+</table>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <a class="btn btn-info" href="/course/add" role="button">Добавить учителя</a>
+</div>
+
+<script type="text/javascript" th:src="@{static/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" th:src="@{static/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{static/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
